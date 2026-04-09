@@ -6,14 +6,14 @@ from db.models import Movie
 
 
 def get_movies(genres_ids: Optional = None,
-               actors_ids: Optional = None) -> QuerySet:
+               actors_ids: Optional = None) -> Movie:
     if genres_ids and actors_ids:
         return Movie.objects.filter(genres__in=genres_ids,
-                                    actors__in=actors_ids)
+                                    actors__in=actors_ids).distinct()
     if genres_ids:
-        return Movie.objects.filter(genres__in=genres_ids)
+        return Movie.objects.filter(genres__in=genres_ids).distinct()
     if actors_ids:
-        return Movie.objects.filter(actors__in=actors_ids)
+        return Movie.objects.filter(actors__in=actors_ids).distinct()
 
     return Movie.objects.all()
 
