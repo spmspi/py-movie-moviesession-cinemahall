@@ -47,10 +47,10 @@ def update_movie_session(session_id: int,
         ).update(
             cinema_hall_id=cinema_hall_id
         )
-    return MovieSession.objects.filter(
+    return MovieSession.objects.get(
         id=session_id
     )
 
 
-def delete_movie_session_by_id(session_id: int) -> MovieSession:
+def delete_movie_session_by_id(session_id: int) -> None:
     return MovieSession.objects.filter(id=session_id).delete()

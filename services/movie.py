@@ -1,10 +1,12 @@
 from typing import Optional
 
+from django.db.models import QuerySet
+
 from db.models import Movie
 
 
 def get_movies(genres_ids: Optional = None,
-               actors_ids: Optional = None) -> Movie:
+               actors_ids: Optional = None) -> QuerySet[Movie]:
     if genres_ids and actors_ids:
         return Movie.objects.filter(genres__in=genres_ids,
                                     actors__in=actors_ids).distinct()
